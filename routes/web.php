@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 
 //test
 // Pages
+
+//pp
 Route::get('/home', [DashboardController::class, 'dashboard'])->name('home');
 Route::get('/about', [PagesController::class, 'about'])->name('about');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
