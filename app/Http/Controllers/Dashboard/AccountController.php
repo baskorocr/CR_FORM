@@ -31,7 +31,7 @@ class AccountController extends Controller
         $data = [
             'title' => 'Account | DPM',
             'roles' => $roles
-        ]; 
+        ];
         return view('dashboard.account.create', $data);
     }
 
@@ -53,7 +53,7 @@ class AccountController extends Controller
             'departement' => $validated['departement'],
             'password' => $validated['password']
         ]);
-        
+
         Profile::create([
             'name' => $validated['name'],
             'user_id' => $user->id
@@ -85,7 +85,11 @@ class AccountController extends Controller
 
     public function update(Request $request, string $id)
     {
+
+
         $account = User::findOrFail($id);
+
+
 
         $validated = $request->validate([
             'name' => 'required|max:255',
@@ -96,9 +100,11 @@ class AccountController extends Controller
             'password' => 'nullable|min:6|confirmed',
         ]);
 
+
+
         $profile = Profile::where('user_id', $id)->first();
 
-        if($request->filled('password')) {
+        if ($request->filled('password')) {
             $account->update([
                 'username' => $validated['username'],
                 'email' => $validated['email'],
