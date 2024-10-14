@@ -11,10 +11,7 @@ use App\Http\Controllers\Dashboard\ProposalController;
 use App\Http\Controllers\Pages\PagesController;
 use Illuminate\Support\Facades\Route;
 
-//test
-// Pages
 
-//pp
 Route::get('/home', [DashboardController::class, 'dashboard'])->name('home');
 Route::get('/about', [PagesController::class, 'about'])->name('about');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
@@ -25,7 +22,7 @@ Route::prefix('auth')->group(function () {
 
     // Register
     Route::get('/register', [RegisterController::class, 'registerForm'])->middleware(['guest'])->name('register.form');
-    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+    // Route::post('/register', [RegisterController::class, 'register'])->name('register');
 
     // Email Verify
     Route::get('/email/verify', [EmailController::class, 'verifyEmailForm'])->middleware('auth')->name('verification.notice');

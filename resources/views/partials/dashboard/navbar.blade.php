@@ -11,19 +11,23 @@
   <ul class="navbar-nav ml-auto">
     <!-- User Profile -->
     <li class="nav-item dropdown user-menu">
+      @auth
       <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
         <img src="{{ asset('template/dashboard/dist/img/avatar5.png') }}" class="user-image img-circle elevation-2" alt="Image">
         <span class="d-none d-md-inline">{{ auth()->user()->username }}</span>
       </a>
+      @endauth
       <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
 
         <!-- User image -->
         <li class="user-header bg-primary">
           <img src="{{ asset('template/dashboard/dist/img/avatar5.png') }}" class="img-circle elevation-2" alt="Image">
+          @auth
           <p>
             {{ auth()->user()->profile->name }} 
             <small>{{ auth()->user()->role->name }}</small>
           </p>
+          @endauth
         </li>
 
         <!-- Menu Footer-->

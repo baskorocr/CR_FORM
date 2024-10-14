@@ -14,8 +14,7 @@ class RegisterController extends Controller
     // Register Form
     public function registerForm()
     {
-        $data = ["title" => "Register | FAMS"];
-        return view('auth.register', $data);
+        abort(404);
     }
 
     // Register
@@ -35,12 +34,12 @@ class RegisterController extends Controller
             'departement' => 'required|max:255',
             'password' => $validated['password']
         ]);
-        
+
         Profile::create([
             'name' => $validated['name'],
             'user_id' => $user->id
         ]);
-        
+
         Auth::login($user);
 
         event(new Registered($user));
