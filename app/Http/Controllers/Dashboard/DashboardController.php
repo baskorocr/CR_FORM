@@ -100,7 +100,7 @@ class DashboardController extends Controller
         $proposal = Proposal::select('status_dh', DB::raw('COUNT(*) as count'))->groupBy('status_dh')->get();
 
         $chart = [
-            'labels' => $proposal->pluck('status'),
+            'labels' => $proposal->pluck('status_dh'),
             'datasets' => [
                 [
                     'label' => 'Status CR',
