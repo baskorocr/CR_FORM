@@ -11,13 +11,14 @@ use App\Http\Controllers\Dashboard\ProposalController;
 use App\Http\Controllers\Pages\PagesController;
 use Illuminate\Support\Facades\Route;
 
-    // Pages
-    Route::get('/home', [DashboardController::class, 'dashboard'])->name('home');
-    Route::get('/about', [PagesController::class, 'about'])->name('about');
-    Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+//test
+// Pages
+Route::get('/home', [DashboardController::class, 'dashboard'])->name('home');
+Route::get('/about', [PagesController::class, 'about'])->name('about');
+Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 
-    // Authentication
-    Route::prefix('auth')->group(function () {
+// Authentication
+Route::prefix('auth')->group(function () {
     // ... (Your existing routes)
 
     // Register
@@ -34,29 +35,29 @@ use Illuminate\Support\Facades\Route;
     Route::post('/forgot-password', [PasswordController::class, 'forgotPassword'])->middleware(['guest'])->name('password.email');
     Route::get('/reset-password/{token}', [PasswordController::class, 'resetPasswordForm'])->middleware(['guest'])->name('password.reset');
     Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->middleware(['guest'])->name('password.update');
-    
+
     // Login
     Route::get('/login', [LoginController::class, 'loginForm'])->middleware(['guest'])->name('login.form');
     Route::post('/login', [LoginController::class, 'login'])->middleware(['guest'])->name('login');
-    
+
     //Logout
     Route::post('/logout', [LoginController::class, 'logout'])->middleware(['auth'])->name('logout');
-    });
+});
 
-    // Redirect to login
-    Route::get('/', function () {
+// Redirect to login
+Route::get('/', function () {
     return redirect()->route('login.form');
-    });
+});
 
-    // Dashboard
-    Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function() {
+// Dashboard
+Route::prefix('dashboard')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-    
+
     // Profile
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::patch('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/password', [ProfileController::class, 'password'])->name('profile.password');
-    
+
     // Proposal
     Route::resource('proposal', ProposalController::class);
     Route::post('/proposal/{id}/print', [ProposalController::class, 'print'])->name('proposal.print');
@@ -64,11 +65,10 @@ use Illuminate\Support\Facades\Route;
 
     // Account
     Route::resource('account', AccountController::class);
-    });
+});
 
-    Route::get('/proposal/{proposal_id}/approveDH', [ProposalController::class, 'approveDH'])->name('proposal.approveDH');
-    Route::get('/proposal/{proposal_id}/rejectDH', [ProposalController::class, 'rejectDH'])->name('proposal.rejectDH');
-    Route::get('/proposal/{proposal_id}/approveDIVH', [ProposalController::class, 'approveDIVH'])->name('proposal.approveDIVH');
-    Route::get('/proposal/{proposal_id}/rejectDIVH', [ProposalController::class, 'rejectDIVH'])->name('proposal.rejectDIVH');
-    Route::get('proposal/{proposal_id}/detail', [ProposalController::class, 'detail'])->name('proposal.detail');
-    
+Route::get('/proposal/{proposal_id}/approveDH', [ProposalController::class, 'approveDH'])->name('proposal.approveDH');
+Route::get('/proposal/{proposal_id}/rejectDH', [ProposalController::class, 'rejectDH'])->name('proposal.rejectDH');
+Route::get('/proposal/{proposal_id}/approveDIVH', [ProposalController::class, 'approveDIVH'])->name('proposal.approveDIVH');
+Route::get('/proposal/{proposal_id}/rejectDIVH', [ProposalController::class, 'rejectDIVH'])->name('proposal.rejectDIVH');
+Route::get('proposal/{proposal_id}/detail', [ProposalController::class, 'detail'])->name('proposal.detail');
